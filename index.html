@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Meme Maker</title>
+  </head>
+  <body onload="onInit()">
+    <header>
+      <div class="main-layout flex space-between">
+        <img class="logo" src="img/LOGO.png" onclick="onOpenPage('gallery')" />
+        <ul class="flex align-center clean-list">
+          <li>
+            <a
+              href="#"
+              onclick="onOpenPage('gallery')"
+              class="navbar menu-home active"
+              data-trans="gallery"
+              >Gallery</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              onclick="onOpenPage('memes')"
+              class="navbar menu-acount"
+              data-trans="my-memes"
+              >My Memes</a
+            >
+          </li>
+          <li>
+            <a href="" class="navbar menu-acount" data-trans="about">About</a>
+          </li>
+          <select class="select-lang" onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+          </select>
+        </ul>
+      </div>
+    </header>
+    <main class="main-layout main-container justify-center">
+      <div class="gallery-container">
+        <div class="tags-container flex"></div>
+        <div class="main-layout">
+          <div class="images-menu grid-container"></div>
+        </div>
+      </div>
+      <div class="editor-container flex hide">
+        <div class="canvas-container flex justify-center align-center">
+          <canvas height="500" width="500"></canvas>
+        </div>
+        <div class="tools grid">
+          <input type="text" />
+          <button class="trash"><img src="/img/icons/trash.png" /></button>
+          <button class="add"><img src="/img/icons/add.png" /></button>
+          <button class="move-down">down</button>
+          <button class="move-up">up</button>
+          <button class="switch">
+            <img src="/img/icons/up-and-down.png" />
+          </button>
+          <button class="align-right">
+            <img src="/img/icons/align-right.png" />
+          </button>
+          <button class="align-center">
+            <img src="/img/icons/align-center.png" />
+          </button>
+          <button class="align-left">
+            <img src="/img/icons/align-left.png" />
+          </button>
+          <button class="font-size-down">
+            <img src="/img/icons/de-font.png" />
+          </button>
+          <button class="font-size-up">
+            <img src="/img/icons/in-font.png" />
+          </button>
+          <button class="color-change">
+            <img src="/img/icons/paint-board.png" />
+          </button>
+          <button class="stroke">
+            <img src="/img/icons/text-stroke.png" />
+          </button>
+          <select
+            class="font-select"
+            name="font"
+            onchange="onSetFont(this.value)"
+          >
+            <option value="impact">Impact</option>
+            <option value="ariel">Ariel</option>
+            <option value="david">David</option>
+          </select>
+          <button class="download"></button>
+          <button class="save"></button>
+          <button class="publish"></button>
+        </div>
+      </div>
+      <div class="memes-container hide">
+        <!-- All saves memes -->
+      </div>
+    </main>
+
+    <script src="js/sevices/storage-service.js"></script>
+    <script src="js/sevices/util-service.js"></script>
+    <script src="js/sevices/i18n-service.js"></script>
+    <script src="js/sevices/gallery-service.js"></script>
+    <script src="js/sevices/canvas-service.js"></script>
+    <script src="js/sevices/user-service.js"></script>
+    <script src="js/view/render-view.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+}
+
+/* FONTS */
+@font-face {
+  font-family: 'latobold';
+  src: url('../fonts/lato/Lato-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/***** BASE *****/
+html {
+  color: #626262;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #dddddd;
+  color: #5d737e;
+  height: 100vh;
+  width: 100wh;
+}
+.rtl {
+  direction: rtl;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  margin: 0;
+}
+.images-menu img {
+  width: 100%;
+  /* align-self: center; */
+}
+button > img {
+  width: 40px;
+}
+canvas {
+  border: 2px solid #5d737e;
+  width: 100%;
+  height: 100%;
+}
+
+/* LAYOUT */
+.main-layout {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+/***** HEADER *****/
+header {
+  background-color: #c0fdfb;
+  /* box-shadow: inset 0 0 5px 0 black; */
+  border-bottom: 4px solid #5d737e;
+}
+.logo {
+  height: 50px;
+  min-width: 100px;
+  padding-inline-start: 20px;
+  cursor: pointer;
+}
+header li a {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-family: latobold;
+  padding: 30px;
+  color: #5d737e;
+}
+
+/*************** MAIN CONTENT ***************/
+main {
+  position: relative;
+}
+
+/*** ACTIONS ***/
+
+/****** GALLERY ******/
+.meme {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border 0.2s;
+}
+.meme:hover {
+  border: 4px solid white;
+  opacity: 0.7;
+}
+
+/*** CANVAS ***/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 150px);
+  grid-auto-rows: 150px;
+  gap: 10px;
+}
+.canvas-container {
+  height: 600px;
+  width: 600px;
+}
+/* .editor-container {
+} */
+
+/***** HELPERS *****/
+.btn {
+  cursor: pointer;
+}
+
+/* flex helpers */
+.flex {
+  display: flex;
+}
+.flex.space-between {
+  justify-content: space-between;
+}
+.flex.space-around {
+  justify-content: space-around;
+}
+.flex.align-center {
+  align-items: center;
+}
+.flex.direction-col {
+  flex-direction: column;
+}
+.flex.justify-center {
+  justify-content: center;
+}
+.grid {
+  display: grid;
+}
+
+/* list-helpers */
+.clean-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.hide {
+  display: none;
+}
+
+/******** MOBILE ONLY ********/
+@media (max-width: 820px) {
+}
+
+/******** MEDIUM ********/
+@media (min-width: 820px) {
+}
+
+/******** REGULAR ********/
+@media (min-width: 1100px) {
+}
