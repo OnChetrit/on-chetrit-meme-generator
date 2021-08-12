@@ -1,14 +1,47 @@
 'use strict'
 
 // RENDERING
+var gElCanvas;
+var gCtx;
+var gCurrRatio = 1;
 
-function renderCanvas() {
-    gCtx.save()
-    gCtx.fillStyle = "#fff"
-    gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
-    // renderCircle()
-    gCtx.restore()
+function initCanvas() {
+    gElCanvas = document.querySelector('canvas');
+    gCtx = gElCanvas.getContext('2d');
 }
+///////////////////////// CANVAS FUNCS /////////////////////////
+function renderCanvas() {
+    var meme = getMeme();
+    var img = new Image();
+    var currImg = getImgById(meme.selectedImgId);
+    img.src = currImg.url;
+    img.onload = function () {
+        clearCanvas();
+        setInputText();
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+        meme.lines.forEach(line => {
+            drawText(line, gElCanvas.width / 2, gElCanvas.height / 2);
+        });
+        console.log(meme);
+    }
+}
+function clearCanvas() {
+    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+}
+function setInputText() {
+    var meme = getMeme()
+    document.querySelector('.meme-text').value = meme.lines[meme.selectedLineIdx].txt
+}
+function drawText(line) {
+    gCtx.lineWidth = 1;
+    gCtx.strokeStyle = 'black';
+    gCtx.fillStyle = line.color;
+    gCtx.font = `${line.size}px ${line.font}`;
+    gCtx.textAlign = line.align;
+    gCtx.fillText(line.txt, line.pos.x, line.pos.y)
+    gCtx.strokeText(line.txt, line.pos.x, line.pos.y)
+}
+
 function renderImgs() {
     const images = getImgs();
     let strHtmls = images.map(image => {
@@ -24,3 +57,20 @@ function renderMain(page) {
 
     document.querySelector(`.${page}-container`).classList.remove('hide');
 }
+function updateMemeTxtInput() {
+    document.querySelector('.meme-text').value = getSelectedLineTxt();
+}
+
+///////////////////////// GETS /////////////////////////
+function getCtx() {
+    return gCtx;
+}
+function getCanvas() {
+    return gElCanvas;
+}
+// function renderTags() {
+//     const tagsCount = getTags();
+//     let strHtml = Object.keys(tagsCount).map((tag) => `<option value="${tag}"></option>`)
+//         .join('');
+//     document.querySelector('#search-tags').innerHTML = strHtml;
+// }

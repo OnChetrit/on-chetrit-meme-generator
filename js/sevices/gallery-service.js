@@ -1,7 +1,7 @@
 'use strict'
 
 let gImgs = [];
-let gTags = [];
+let gTags = {};
 
 
 createImgs();
@@ -42,6 +42,12 @@ function createImg(id, tags) {
 
 function getImgs() {
     return gImgs
+}
+function getTags() {
+    return gTags
+}
+function getImgById(imgId) {
+    return gImgs.find(img => img.id === +imgId)
 }
 
 function updateTags() {

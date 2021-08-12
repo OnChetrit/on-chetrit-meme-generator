@@ -1,16 +1,16 @@
 'use strict'
 
-var gStartPos
+var gIsDragging = false;
+var gIsScaling = false;
+var gStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function onInit() {
     initCanvas();
     renderImgs();
     updateTags();
-    renderCanvas();
-    // rendertags()
-    // resizeCanvas();
-    // addListeners();
+    // renderTags();
+    addListeners();
 }
 
 ///////////////////////// BUTTONS CLICKS /////////////////////////
@@ -26,21 +26,57 @@ function onSetLang(lang) {
 }
 function onOpenPage(page) {
     renderMain(page);
+    document.body.classList.toggle('menu-open');
 }
 function onImgClick(ElImg) {
     renderMain('editor');
-    // let img = ElImg.dataset.id;
-    drawImage(ElImg);
+    let imgId = ElImg.dataset.id;
+    createMeme(imgId);
+    renderCanvas();
+}
+function onToggleMenu() {
+    document.body.classList.toggle('menu-open');
+}
+
+///////////////////////// EDIT CLICKS /////////////////////////
+function onSetText(txt) {
+    var canvas = getCanvas();
+    var color = getColor();
+    var font = getFont();
+    setText(txt, canvas.width, canvas.height, color, font);
+    renderCanvas();
+}
+function onRemoveLine() {
+    removeMeme();
+    renderCanvas();
+}
+function onAddLine() {
+    var canvas = getCanvas();
+    var color = getColor();
+    var font = getFont();
+    addLine(canvas.width, canvas.height, color, font);
+    renderCanvas();
+}
+function onSwitchLine() {
+    switchLine();
+    renderCanvas();
+}
+function onChangePos(value) {
+    ChangePos(value);
+    renderCanvas();
+}
+function onChangeColor(color) {
+    changeColor(color);
+    renderCanvas();
 }
 
 ///////////////////////// LISTENERS /////////////////////////
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
-    window.addEventListener('resize', () => {
-        resizeCanvas()
-        renderCanvas()
-    })
+    // window.addEventListener('resize', () => {
+    //     renderCanvas()
+    // })
 }
 function addMouseListeners() {
     gElCanvas.addEventListener('mousemove', onMove)
@@ -54,25 +90,30 @@ function addTouchListeners() {
 }
 function onDown(ev) {
     const pos = getEvPos(ev)
-    if (!isCircleClicked(pos)) return
-    setCircleDrag(true)
+    const { isDragging, isScaling } = isDraggingOrScaling(pos);
+    gIsDragging = isDragging;
+    gIsScaling = isScaling;
+    renderCanvas();
+    updateMemeTxtInput();
     gStartPos = pos
-    document.body.style.cursor = 'grabbing'
-
+    // document.body.style.cursor = 'grabbing'
 }
 function onMove(ev) {
-    const circle = getCircle();
-    if (circle.isDrag) {
-        const pos = getEvPos(ev)
-        const dx = pos.x - gStartPos.x
-        const dy = pos.y - gStartPos.y
-        moveCircle(dx, dy)
-        gStartPos = pos
-        renderCanvas()
+    if (!gIsDragging && !gIsScaling) return;
+    const pos = getEvPos(ev);
+    if (gIsDragging) {
+        moveSelectedByDragging(pos, gStartPos);
+        gStartPos = pos;
+        renderCanvas();
+        return
     }
+    scaleSelectedByDragging(pos, gStartPos);
+    gStartPos = pos;
+    renderCanvas();
 }
 function onUp() {
-    setCircleDrag(false)
+    gIsDragging = false;
+    gIsScaling = false;
     document.body.style.cursor = 'grab'
 }
 function getEvPos(ev) {
@@ -92,8 +133,3 @@ function getEvPos(ev) {
 }
 
 ///////////////////////// CANVAS /////////////////////////
-function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth - 600;
-    gElCanvas.height = elContainer.offsetHeight - 200;
-}
