@@ -29,6 +29,13 @@ function createImgs() {
     createImg(16, ['man', 'laughing', 'surprised', 'movie'])
     createImg(17, ['man', 'explaining', 'pointing', 'politics'])
     createImg(18, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(19, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(20, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(21, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(22, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(23, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(24, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(25, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
 }
 function createImg(id, tags) {
     let img = {

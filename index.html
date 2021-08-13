@@ -60,7 +60,7 @@
 
     <main class="main-layout main-container">
       <div class="gallery-container">
-        <div class="tags-container"></div>
+        <!-- <div class="tags-container"></div> -->
         <div class="main-layout">
           <div class="images-menu grid-container"></div>
         </div>
@@ -122,30 +122,35 @@
             </div>
             <div class="flex justify-evenly row-reverse">
               <button
+                title="Align Text Right"
                 class="align-right tool-btn btn"
                 onclick="onSetTextAlign('right')"
               >
                 <img src="img/icons/align-right.png" />
               </button>
               <button
+                title="Align Text Center"
                 class="align-center tool-btn btn"
                 onclick="onSetTextAlign('center')"
               >
                 <img src="img/icons/align-center.png" />
               </button>
               <button
+                title="Align Text Left"
                 class="align-left tool-btn btn"
                 onclick="onSetTextAlign('left')"
               >
                 <img src="img/icons/align-left.png" />
               </button>
               <button
+                title="Decrease Font Size"
                 class="font-size-down tool-btn btn"
                 onclick="onChangeFontSize(-2)"
               >
                 <img src="img/icons/de-font.png" />
               </button>
               <button
+                title="Increase Font Size"
                 class="font-size-up tool-btn btn"
                 onclick="onChangeFontSize(+2)"
               >
@@ -153,7 +158,10 @@
               </button>
             </div>
             <div class="flex justify-evenly">
-              <button class="color-change tool-btn btn">
+              <button
+                title="Change Text Color"
+                class="color-change tool-btn btn"
+              >
                 <input
                   class="btn"
                   type="color"
@@ -164,7 +172,10 @@
                 />
                 <img src="img/icons/color-select.png" class="color-select" />
               </button>
-              <button class="stroke tool-btn btn">
+              <button
+                title="Change Stroke Text Color"
+                class="stroke tool-btn btn"
+              >
                 <input
                   class="btn"
                   type="color"

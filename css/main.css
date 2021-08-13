@@ -121,7 +121,6 @@ main {
 .select-lang {
   background-color: #fe6e20;
 }
-
 .select-lang,
 .select-lang option {
   color: #ffffff;
@@ -133,7 +132,7 @@ main {
 
 /****** GALLERY ******/
 .grid-container {
-  display: grid;
+  column-count: 6;
   grid-template-columns: repeat(auto-fit, 100px);
   grid-auto-rows: 100px;
 
@@ -147,21 +146,16 @@ main {
   transition: border 0.2s;
 }
 .meme:hover {
-  border: 4px solid white;
   opacity: 0.7;
 }
 
 /********** EDITOR **********/
 
 /****** CANVAS ******/
-
 .canvas-container-container {
   flex-basis: 50%;
   display: grid;
   align-items: center;
-  /* height: 532px; */
-  /* display: grid;
-  align-self: center; */
 }
 
 /**** TOOLS ****/
@@ -311,6 +305,9 @@ select {
   .logo {
     height: 20px;
   }
+  .grid-container {
+    column-count: 2;
+  }
 
   .editor-container {
     flex-direction: column;
@@ -369,6 +366,9 @@ select {
     flex-direction: column;
     height: 80vh;
   }
+  .grid-container {
+    column-count: 3;
+  }
   body.menu-open .screen {
     /* display: block; */
     opacity: 1;
@@ -410,6 +410,9 @@ select {
     background-color: #626262;
     height: 402px;
   }
+  .grid-container {
+    column-count: 4;
+  }
   .btn-menu-toggle,
   .close-menu {
     display: none;
@@ -447,5 +450,8 @@ select {
   }
   header li a {
     font-size: 1.8rem;
+  }
+  .grid-container {
+    column-count: 6;
   }
 }
