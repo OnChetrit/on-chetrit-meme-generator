@@ -8,7 +8,7 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 function onInit() {
     initCanvas();
     renderImgs();
-    updateTags();
+    // updateTags();
     // renderTags();
     addListeners();
 }
@@ -16,7 +16,7 @@ function onInit() {
 ///////////////////////// BUTTONS CLICKS /////////////////////////
 function onSetLang(lang) {
     setLang(lang);
-    if (lang === 'עברית') {
+    if (lang === 'he') {
         document.body.classList.add('rtl');
     }
     else {
@@ -33,6 +33,7 @@ function onImgClick(ElImg) {
     let imgId = ElImg.dataset.id;
     createMeme(imgId);
     renderCanvas();
+    resetSelections();
 }
 function onToggleMenu() {
     document.body.classList.toggle('menu-open');
@@ -40,21 +41,20 @@ function onToggleMenu() {
 
 ///////////////////////// EDIT CLICKS /////////////////////////
 function onSetText(txt) {
-    var canvas = getCanvas();
-    var color = getColor();
-    var font = getFont();
-    setText(txt, canvas.width, canvas.height, color, font);
+    // var canvas = getCanvas();
+    // var color = getColor();
+    // var font = getFont();
+    // setText(txt, canvas.width, canvas.height, color, font);
+    setText(txt);
     renderCanvas();
 }
 function onRemoveLine() {
-    removeMeme();
+    removeLine();
     renderCanvas();
 }
 function onAddLine() {
     var canvas = getCanvas();
-    var color = getColor();
-    var font = getFont();
-    addLine(canvas.width, canvas.height, color, font);
+    addLine(canvas.width, canvas.height);
     renderCanvas();
 }
 function onSwitchLine() {
@@ -67,8 +67,27 @@ function onChangePos(value) {
 }
 function onChangeColor(color) {
     changeColor(color);
+    renderButtonColor();
     renderCanvas();
 }
+function onChangeStroke(color) {
+    changeStroke(color);
+    renderButtonStrokeColor(color);
+    renderCanvas();
+}
+function onSetTextAlign(align) {
+    setTextAlign(align);
+    renderCanvas();
+}
+function onChangeFontSize(value) {
+    changeFontSize(value);
+    renderCanvas();
+}
+function onDownloadImg(elLink) {
+    var imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent;
+}
+
 
 ///////////////////////// LISTENERS /////////////////////////
 function addListeners() {

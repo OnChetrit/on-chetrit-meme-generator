@@ -31,6 +31,12 @@ body {
 .rtl {
   direction: rtl;
 }
+body.rtl .meme-text {
+  text-align: right;
+}
+body.rtl .download a span {
+  font-size: 1.2rem;
+}
 h1,
 h2,
 h3,
@@ -44,8 +50,12 @@ h6 {
   width: 100%;
   /* align-self: center; */
 }
-button > img {
+button > img,
+.download-txt {
   width: 30px;
+}
+button {
+  padding: 0px;
 }
 canvas {
   border: 4px solid #fe6e20;
@@ -63,23 +73,27 @@ canvas {
 header {
   background-color: #9e9e9e;
   border-bottom: 4px solid #5d737e;
+  margin-bottom: 60px;
 }
 .logo {
   height: 40px;
   cursor: pointer;
+  margin: 30px 0px;
 }
 header li a {
   display: inline-block;
   text-decoration: none;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-family: latobold;
-  padding: 30px;
   color: #fe6e20;
   text-shadow: 0px 0px 4px black, 0px 0px 4px black, 0px 0px 4px black,
     0px 0px 4px black;
 }
 header li a.about {
   color: #fb9623;
+}
+.main-nav {
+  gap: 40px;
 }
 .btn-menu-toggle,
 .close-menu {
@@ -118,6 +132,15 @@ main {
 }
 
 /****** GALLERY ******/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 100px);
+  grid-auto-rows: 100px;
+
+  gap: 10px;
+  margin: 0 auto;
+  justify-content: center;
+}
 .meme {
   border-radius: 5px;
   cursor: pointer;
@@ -131,18 +154,14 @@ main {
 /********** EDITOR **********/
 
 /****** CANVAS ******/
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 100px);
-  grid-auto-rows: 100px;
 
-  gap: 10px;
-  margin: 0 auto;
-  justify-content: center;
-}
-.canvas-container {
+.canvas-container-container {
   flex-basis: 50%;
-  height: 532px;
+  display: grid;
+  align-items: center;
+  /* height: 532px; */
+  /* display: grid;
+  align-self: center; */
 }
 
 /**** TOOLS ****/
@@ -159,20 +178,25 @@ main {
 }
 .tools input,
 select {
-  height: 40px;
   border-radius: 10px;
 }
+
 .tool-btn {
   height: 40px;
   width: 40px;
   border-radius: 10px;
   border: transparent;
+  transition: border 0.1s;
 }
 .tool-btn:hover {
   opacity: 0.8;
 }
 .tool-btn:active {
-  opacity: 0.5;
+  border: 4px solid #626262;
+  opacity: 0.6;
+}
+.tool-btn[title] {
+  font-size: 20px;
 }
 .trash {
   background-color: red;
@@ -187,16 +211,42 @@ select {
 .switch {
   background-color: #5c76eb;
 }
-.color-change {
+.color-change,
+.stroke {
   padding: 0;
+  border: 3px solid black;
+  background-color: transparent;
 }
-.color-change input {
+.color-change input,
+.stroke input {
   background-color: transparent;
   position: absolute;
+  color: #ffffff;
   margin: 0;
   opacity: 0;
   border: none;
   padding: 0;
+}
+.color-select {
+  color: #ffffff;
+}
+.download {
+  flex-basis: 60%;
+  background-color: #00d400;
+}
+.download-link {
+  height: 100%;
+  width: 100%;
+}
+.download a span {
+  font-size: 1rem;
+  font-family: 'latobold';
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000000;
+}
+.share {
+  background-color: #1e7cd3;
 }
 
 /****** MEMES ******/
@@ -224,6 +274,9 @@ select {
 }
 .flex.direction-col {
   flex-direction: column;
+}
+.flex.row-reverse {
+  flex-direction: row-reverse;
 }
 .flex.justify-center {
   justify-content: center;
@@ -304,6 +357,14 @@ select {
     transform: translateX(0);
     box-shadow: -8px 0px 20px rgb(0 0 0 / 20%);
   }
+  body.rtl .main-nav {
+    transform: translateX(-100%);
+    /* box-shadow: -8px 0px 20px rgb(0 0 0 / 20%); */
+  }
+  body.menu-open.rtl .main-nav {
+    transform: translateX(0);
+    /* box-shadow: -8px 0px 20px rgb(0 0 0 / 20%); */
+  }
   .editor-container {
     flex-direction: column;
     height: 80vh;
@@ -314,10 +375,21 @@ select {
     pointer-events: auto;
     z-index: 5;
   }
+  body.rtl .close-menu-img,
+  body.rtl .main-nav {
+    right: auto;
+    left: 0;
+  }
 }
 
 /******** LARGE ********/
 @media (min-width: 780px) {
+  body.rtl .download a span {
+    font-size: 1.5rem;
+  }
+  .download a span {
+    font-size: 1.2rem;
+  }
   .main-layout {
     max-width: 740px;
   }
@@ -325,18 +397,18 @@ select {
   select {
     height: 40px;
   }
-  .canvas-container {
-    height: 402px;
-  }
+  /* .canvas-container {
+  } */
   .tool-btn {
     height: 40px;
     width: 40px;
   }
-  button > img {
+  /* button > img, .download-txt {
     width: 30px;
-  }
+  } */
   .editor-container {
-    background-color: #fff;
+    background-color: #626262;
+    height: 402px;
   }
   .btn-menu-toggle,
   .close-menu {
@@ -350,17 +422,30 @@ select {
 
 /******** EXTRA LARGE ********/
 @media (min-width: 1100px) {
+  body.rtl .download a span {
+    font-size: 2rem;
+  }
+  .download a span {
+    font-size: 1.5rem;
+  }
   .main-layout {
     max-width: 1060px;
   }
-  .canvas-container {
-    height: 532px;
+  .editor-container {
+    height: 600px;
   }
   .tool-btn {
     height: 60px;
     width: 60px;
   }
-  button > img {
+  button > img,
+  .download-txt {
     width: 40px;
+  }
+  .logo {
+    margin: 40px 0px;
+  }
+  header li a {
+    font-size: 1.8rem;
   }
 }

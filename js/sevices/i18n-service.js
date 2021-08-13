@@ -15,6 +15,14 @@ let gTrans = {
         en: 'About',
         he: 'אודות'
     },
+    download: {
+        en: 'Dowmload',
+        he: 'הורדה'
+    },
+    'enter-text': {
+        en: 'Enter Text',
+        he: 'הכנס טקסט'
+    },
 }
 
 

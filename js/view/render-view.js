@@ -16,14 +16,24 @@ function renderCanvas() {
     var currImg = getImgById(meme.selectedImgId);
     img.src = currImg.url;
     img.onload = function () {
-        clearCanvas();
+        // clearCanvas();
+        gCurrRatio = img.width / img.height;
+        resizeCanvas();
         setInputText();
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
         meme.lines.forEach(line => {
-            drawText(line, gElCanvas.width / 2, gElCanvas.height / 2);
+            drawText(line);
+            showSelectedBorder(line)
         });
-        console.log(meme);
     }
+}
+function resizeCanvas() {
+    const elEditorContainer = document.querySelector('.canvas-container-container');
+    const elCanvasContainer = document.querySelector('.canvas-container');
+    const canvasContainerW = elCanvasContainer.offsetHeight * gCurrRatio;
+    elEditorContainer.style.heigth = canvasContainerW + 'px';
+    gElCanvas.height = elCanvasContainer.offsetHeight;
+    gElCanvas.width = canvasContainerW;
 }
 function clearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
@@ -34,12 +44,14 @@ function setInputText() {
 }
 function drawText(line) {
     gCtx.lineWidth = 1;
-    gCtx.strokeStyle = 'black';
+    gCtx.strokeStyle = line.strokeColor;
     gCtx.fillStyle = line.color;
     gCtx.font = `${line.size}px ${line.font}`;
     gCtx.textAlign = line.align;
-    gCtx.fillText(line.txt, line.pos.x, line.pos.y)
-    gCtx.strokeText(line.txt, line.pos.x, line.pos.y)
+    gCtx.fillText(line.txt, line.pos.x, line.pos.y);
+    gCtx.strokeText(line.txt, line.pos.x, line.pos.y);
+
+
 }
 
 function renderImgs() {
@@ -59,6 +71,13 @@ function renderMain(page) {
 }
 function updateMemeTxtInput() {
     document.querySelector('.meme-text').value = getSelectedLineTxt();
+}
+function renderButtonColor() {
+    document.querySelector('.color-change').style.backgroundColor = getCurrLine().color;
+}
+function renderButtonStrokeColor(color) {
+    document.querySelector('.stroke').style.backgroundColor = color;
+
 }
 
 ///////////////////////// GETS /////////////////////////

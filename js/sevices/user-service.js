@@ -28,7 +28,6 @@ function _saveMemesToStorage() {
     saveToStorage(KEY, gSavedMemes)
 }
 ////////////////////////////////////////////////////////////////
-
 function loadMemes() {
     var memes = getMemesFromStorage()
     if (!memes) return

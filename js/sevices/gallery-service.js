@@ -29,8 +29,10 @@ function createImgs() {
     createImg(16, ['man', 'laughing', 'surprised', 'movie'])
     createImg(17, ['man', 'explaining', 'pointing', 'politics'])
     createImg(18, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(19, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(20, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
+    createImg(21, ['pointing', 'movie', 'explaining', 'scared', 'sad'])
 }
-
 function createImg(id, tags) {
     let img = {
         id,
@@ -40,6 +42,7 @@ function createImg(id, tags) {
     gImgs.push(img);
 }
 
+///////////////////////// GETS /////////////////////////
 function getImgs() {
     return gImgs
 }
@@ -50,14 +53,15 @@ function getImgById(imgId) {
     return gImgs.find(img => img.id === +imgId)
 }
 
-function updateTags() {
-    gImgs.forEach((img) => {
-        img.tags.forEach((tag) => {
-            if (!gTags[tag]) {
-                gTags[tag] = 1;
-                return;
-            }
-            gTags[tag]++;
-        });
-    });
-}
+
+// function updateTags() {
+//     gImgs.forEach((img) => {
+//         img.tags.forEach((tag) => {
+//             if (!gTags[tag]) {
+//                 gTags[tag] = 1;
+//                 return;
+//             }
+//             gTags[tag]++;
+//         });
+//     });
+// }
