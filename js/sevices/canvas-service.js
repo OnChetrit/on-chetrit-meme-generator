@@ -16,7 +16,7 @@ function createMeme(imgId) {
             align: 'center',
             color: '#ffffff',
             strokeColor: '#000000',
-            font: 'impact',
+            font: 'impact ,comix',
             pos: {
                 x: canvas.width / 2,
                 y: 40
@@ -29,16 +29,16 @@ function createMeme(imgId) {
 
 function removeLine() {
     let lineIdx = gMeme.selectedLineIdx;
-    console.log(lineIdx);
     if (lineIdx >= 0) {
         gMeme.lines.splice(lineIdx, 1);
         if (gMeme.lines.length) {
-            gMeme.selectedLineIdx = gMeme.lines.length;
+            gMeme.selectedLineIdx--;
             return;
         }
-        // gMeme.selectedLineIdx--;
-
+        const canvas = getCanvas();
+        if (lineIdx === 0) addLine(canvas.width, canvas.height);
     }
+
 }
 function setText(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
@@ -66,7 +66,7 @@ function createNewLine(canWidth, canHeight) {
         align: 'center',
         color: '#ffffff',
         strokeColor: '#000000',
-        font: 'impact',
+        font: 'impact ,comix',
         pos: {
             x: canWidth / 2,
             y
@@ -114,6 +114,7 @@ function setTextAlign(align) {
             gMeme.lines[idx].pos.x = getCanvas().width / 2;
             break;
     }
+    console.log(getCanvas().width);
     gMeme.lines[idx].align = align;
 }
 function changeFontSize(value) {
@@ -126,11 +127,11 @@ function changeFontSize(value) {
 
 
 
-
-function showSelectedBorder(line) {
-
-
+function saveMeme() {
+    let savedMemes = getSavedMemes();
+    savedMemes.push(gMeme);
 }
+
 function resetSelections() {
     gMeme.selectedLineIdx = 0;
 }

@@ -8,8 +8,6 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 function onInit() {
     initCanvas();
     renderImgs();
-    // updateTags();
-    // renderTags();
     addListeners();
 }
 
@@ -26,7 +24,7 @@ function onSetLang(lang) {
 }
 function onOpenPage(page) {
     renderMain(page);
-    document.body.classList.toggle('menu-open');
+    if (document.body.offsetWidth <= 780) onToggleMenu();
 }
 function onImgClick(ElImg) {
     renderMain('editor');
@@ -34,32 +32,39 @@ function onImgClick(ElImg) {
     createMeme(imgId);
     renderCanvas();
     resetSelections();
+    focusInput();
+    renderButtonColor();
+    renderButtonStrokeColor();
 }
 function onToggleMenu() {
+
     document.body.classList.toggle('menu-open');
 }
 
 ///////////////////////// EDIT CLICKS /////////////////////////
 function onSetText(txt) {
-    // var canvas = getCanvas();
-    // var color = getColor();
-    // var font = getFont();
-    // setText(txt, canvas.width, canvas.height, color, font);
     setText(txt);
     renderCanvas();
 }
 function onRemoveLine() {
     removeLine();
     renderCanvas();
+    focusInput();
 }
 function onAddLine() {
     var canvas = getCanvas();
     addLine(canvas.width, canvas.height);
     renderCanvas();
+    focusInput();
+    renderButtonColor();
+    renderButtonStrokeColor();
 }
 function onSwitchLine() {
     switchLine();
     renderCanvas();
+    focusInput();
+    renderButtonColor();
+    renderButtonStrokeColor();
 }
 function onChangePos(value) {
     ChangePos(value);
@@ -72,7 +77,7 @@ function onChangeColor(color) {
 }
 function onChangeStroke(color) {
     changeStroke(color);
-    renderButtonStrokeColor(color);
+    renderButtonStrokeColor();
     renderCanvas();
 }
 function onSetTextAlign(align) {
@@ -86,6 +91,10 @@ function onChangeFontSize(value) {
 function onDownloadImg(elLink) {
     var imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent;
+}
+function onSaveMeme() {
+    saveMeme();
+    // toggleSavedModal();
 }
 
 
@@ -109,13 +118,9 @@ function addTouchListeners() {
 }
 function onDown(ev) {
     const pos = getEvPos(ev)
-    const { isDragging, isScaling } = isDraggingOrScaling(pos);
-    gIsDragging = isDragging;
-    gIsScaling = isScaling;
     renderCanvas();
     updateMemeTxtInput();
     gStartPos = pos
-    // document.body.style.cursor = 'grabbing'
 }
 function onMove(ev) {
     if (!gIsDragging && !gIsScaling) return;

@@ -34,7 +34,9 @@ function loadMemes() {
     gSavedMemes = memes
     return gSavedMemes
 }
-
+function getSavedMemes() {
+    return gSavedMemes;
+}
 function getMemesFromStorage() {
     var memes = loadFromStorage(KEY)
     return memes
