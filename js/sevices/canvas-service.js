@@ -1,8 +1,6 @@
 'use strict'
 
 let gMeme;
-// let gCurrColor = '#fff';
-// let gCurrFont = 'impact';
 
 function createMeme(imgId) {
     var canvas = getCanvas();
@@ -83,10 +81,11 @@ function switchLine() {
 }
 function ChangePos(value) {
     let idx = gMeme.selectedLineIdx;
-    value *= 3;
+    let currTextPosY = gMeme.lines[idx].pos.y
+    const canvasH = getCanvas().height;
     if (idx >= 0) {
-        gMeme.lines[idx].pos.y += value;
-        return;
+        if (currTextPosY + value > 30 && currTextPosY + value < canvasH)
+            gMeme.lines[idx].pos.y += value;
     }
 }
 function changeColor(color) {
@@ -114,7 +113,6 @@ function setTextAlign(align) {
             gMeme.lines[idx].pos.x = getCanvas().width / 2;
             break;
     }
-    console.log(getCanvas().width);
     gMeme.lines[idx].align = align;
 }
 function changeFontSize(value) {
@@ -123,13 +121,16 @@ function changeFontSize(value) {
     gMeme.lines[idx].size += value;
 
 }
+function setFont(font) {
+    gMeme.lines[gMeme.selectedLineIdx].font = font;
+}
 
 
 
-
-function saveMeme() {
+function saveMeme(imgContent) {
     let savedMemes = getSavedMemes();
     savedMemes.push(gMeme);
+    _saveMemesToStorage
 }
 
 function resetSelections() {
@@ -141,15 +142,8 @@ function getSelectedLineTxt() {
     return '';
 }
 function getCurrLine() {
-    var currLineIdx = gMeme.selectedLineIdx
-    return gMeme.lines[currLineIdx]
+    return gMeme.lines[gMeme.selectedLineIdx]
 }
 function getMeme() {
     return gMeme;
-}
-function getColor() {
-    return gCurrColor;
-}
-function getFont() {
-    return gCurrFont;
 }

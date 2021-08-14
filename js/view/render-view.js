@@ -73,7 +73,16 @@ function renderMain(page) {
 
     document.querySelector(`.${page}-container`).classList.remove('hide');
 }
+///////////////////////// MEMES CONTAINER /////////////////////////
+function renderMemes() {
+    const memes = getSavedMemes();
+    let strHtmls = memes.map(meme => {
+        return `<img data-id=${meme.id} onclick="onImgClick(this)" class="meme"
+        src=${meme.url}>`
+    });
+    document.querySelector('.memes-container').innerHTML = strHtmls.join('');
 
+}
 
 function renderButtonColor() {
     document.querySelector('.color-change').style.backgroundColor = getCurrLine().color;

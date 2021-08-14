@@ -23,6 +23,14 @@ let gTrans = {
         en: 'Enter Text',
         he: 'הכנס טקסט'
     },
+    welcome: {
+        en: 'Welcome to my Meme Generator',
+        he: 'ברוכים הבאים ליצירת הממים שלי'
+    },
+    'p1': {
+        en: 'This app created and designed by On Chetrit',
+        he: 'האפליקציה הזו נכתבה ועוצבה ע"י און שטרית'
+    }
 }
 
 

@@ -8,7 +8,7 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 function onInit() {
     initCanvas();
     renderImgs();
-    addListeners();
+    // addListeners();
 }
 
 ///////////////////////// BUTTONS CLICKS /////////////////////////
@@ -37,8 +37,20 @@ function onImgClick(ElImg) {
     renderButtonStrokeColor();
 }
 function onToggleMenu() {
-
+    console.log('H');
     document.body.classList.toggle('menu-open');
+    if (document.body.classList.contains('about-open'))
+        document.body.classList.toggle('about-open');
+
+}
+function onToggleAboutModal(closeClicked = false) {
+    console.log('H');
+    document.body.classList.toggle('about-open');
+    document.querySelector('.about-modal').classList.toggle('hide');
+    console.log(closeClicked);
+    if (!closeClicked) {
+        if (document.body.offsetWidth <= 780) onToggleMenu();
+    }
 }
 
 ///////////////////////// EDIT CLICKS /////////////////////////
@@ -88,12 +100,17 @@ function onChangeFontSize(value) {
     changeFontSize(value);
     renderCanvas();
 }
+function onSetFont(font) {
+    setFont(font);
+    renderCanvas();
+}
 function onDownloadImg(elLink) {
-    var imgContent = gElCanvas.toDataURL('image/jpeg')
+    var imgContent = gElCanvas.toDataURL('image/jpg').replace("image/png", "image/octet-stream");
     elLink.href = imgContent;
 }
 function onSaveMeme() {
-    saveMeme();
+    var imgContent = gElCanvas.toDataURL('image/jpg')
+    saveMeme(imgContent);
     // toggleSavedModal();
 }
 
@@ -102,9 +119,6 @@ function onSaveMeme() {
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
-    // window.addEventListener('resize', () => {
-    //     renderCanvas()
-    // })
 }
 function addMouseListeners() {
     gElCanvas.addEventListener('mousemove', onMove)
@@ -119,11 +133,9 @@ function addTouchListeners() {
 function onDown(ev) {
     const pos = getEvPos(ev)
     renderCanvas();
-    updateMemeTxtInput();
     gStartPos = pos
 }
 function onMove(ev) {
-    if (!gIsDragging && !gIsScaling) return;
     const pos = getEvPos(ev);
     if (gIsDragging) {
         moveSelectedByDragging(pos, gStartPos);

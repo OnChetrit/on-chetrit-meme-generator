@@ -40,7 +40,7 @@
             >
           </li>
           <li>
-            <a href="#" class="menu-acount about" data-trans="about">About</a>
+            <a href="#" class="menu-acount about" onclick="onToggleAboutModal()" data-trans="about">About</a>
           </li>
           <select class="select-lang radius" onchange="onSetLang(this.value)">
             <option value="en">English</option>
@@ -101,14 +101,14 @@
               <button
                 class="move-down tool-btn btn"
                 title="Move Text Down"
-                onclick="onChangePos(+2)"
+                onclick="onChangePos(+6)"
               >
                 <img src="img/icons/down-arrow.png" />
               </button>
               <button
                 class="move-up tool-btn btn"
                 title="Move Text Up"
-                onclick="onChangePos(-2)"
+                onclick="onChangePos(-6)"
               >
                 <img src="img/icons/up-arrow.png" />
               </button>
@@ -192,9 +192,10 @@
               name="font"
               onchange="onSetFont(this.value)"
             >
-              <option value="impact">Impact</option>
+              <option value="impact, comix">Impact</option>
               <option value="ariel">Ariel</option>
               <option value="david">David</option>
+              <option value="comix">Comix</option>
             </select>
             <div class="flex justify-evenly">
               <button class="download tool-btn btn">
@@ -202,17 +203,16 @@
                   href="#"
                   class="download-link flex justify-center align-center"
                   onclick="onDownloadImg(this)"
-                  download="my-img.jpg"
+                  download="My Meme.jpg"
                   ><img
                     class="download-txt"
                     src="img/icons/download.png"
                   /><span data-trans="download">Download</span></a
                 >
               </button>
-              <button
-                class="save tool-btn btn"
-                onclick="onSaveMeme(event)"
-              ></button>
+              <button class="save tool-btn btn" onclick="onSaveMeme(event)">
+                <img src="img/icons/save.png" />
+              </button>
               <button
                 class="share tool-btn btn"
                 onsubmit="uploadImg(this, event)"
@@ -228,6 +228,17 @@
         <!-- All saves memes -->
       </div>
     </main>
+    <div class="about-modal flex justify-center radius hide direction-col">
+      <button class="close btn" onclick="onToggleAboutModal(true)"><img src="img/icons/close.png" ></button>
+      <h2 data-trans="welcome">Welcome to my Meme Generator</h2>
+      <p data-trans="p1">This app created and designed by <span> On Chetrit</span></p>
+        <div class="social-list">
+
+        <a href="https://github.com/OnChetrit?tab=repositories" target="_blank"><img  class="social" src="img/icons/github-logo.png"></a>
+        <a href="https://www.facebook.com/onchetrit/" target="_blank"><img  class="social" src="img/icons/facebook-logo.png"></a>
+      </div>
+    </div>
+    </div>
 
     <script src="js/sevices/storage-service.js"></script>
     <script src="js/sevices/util-service.js"></script>

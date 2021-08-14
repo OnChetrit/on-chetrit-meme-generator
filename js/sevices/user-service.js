@@ -4,6 +4,7 @@ var gSavedMemes = []
 const KEY = 'memesDB';
 
 
+///////////////////////// USER IMAGE INPUT /////////////////////////
 function onImgInput(ev) {
     loadImageFromInput(ev, renderImg);
 }
