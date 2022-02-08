@@ -88,6 +88,9 @@ canvas {
   text-align: center;
   z-index: 5;
 }
+.about-modal .close img {
+  width: 20px;
+}
 .about-modal .close {
   background-color: transparent;
   border: none;
@@ -96,8 +99,14 @@ canvas {
   top: 25px;
   right: 25px;
 }
-.about-modal .social {
-  width: 50px;
+.about-modal .social-list {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.about-modal .social-list a img {
+  width: 40px;
 }
 
 /*************** HEADER ***************/
@@ -202,6 +211,7 @@ main {
 select {
   border-radius: 10px;
   height: 40px;
+  padding: 0 10px;
 }
 
 .tool-btn {

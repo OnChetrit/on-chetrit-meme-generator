@@ -37,17 +37,14 @@ function onImgClick(ElImg) {
     renderButtonStrokeColor();
 }
 function onToggleMenu() {
-    console.log('H');
     document.body.classList.toggle('menu-open');
     if (document.body.classList.contains('about-open'))
         document.body.classList.toggle('about-open');
 
 }
 function onToggleAboutModal(closeClicked = false) {
-    console.log('H');
     document.body.classList.toggle('about-open');
     document.querySelector('.about-modal').classList.toggle('hide');
-    console.log(closeClicked);
     if (!closeClicked) {
         if (document.body.offsetWidth <= 780) onToggleMenu();
     }
